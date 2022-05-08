@@ -10,6 +10,11 @@
 <!-- Coias boas que deveriamos seguir para colocar no código, coisas que já foram validados por pessaos no passado que já garantiram que é uma forma boa de programar -->
 # Design Patterns/Principles/Conventions
 - You Ain't Gonna Need It (YAGNI): não faça coisas enquanto você não precisa
-- Single Responsibility (SRP): letre S do SOLID
+- Single Responsibility (SRP): letra S do SOLID
+- Liskov Substitution (LSP): letra L do SOLID
+- Dependency Inversion (DIP): letra D do SOLID
 - Arrange, Act, Assert (AAA): todo teste sempre é criado um bloco onde é ordanizado o teste, depois temos uma ação para se tomar e baseado naquela ação vamos testar alguma coisa
 - Dependency Injection (DI): ao invés da minha classe criar as suas proprias dependências, nós recebemos essas dependências de alguém
+- Repository Pattern
+- Test Doubles (Mock)
+- Small Commits

@@ -15,10 +15,12 @@ interface LoadLastEventRepository {
 // variáveis auciliares para poder fazer comparações, só com o in put 
 class LoadLastEventRepositoryMock implements LoadLastEventRepository {
   groupId?: string;
+  callsCount = 0;
 
   async loadLastEvent (groupId: string): Promise<void> {
     // quando eu faço essa atribuição eu consigo fazer uma comparação no teste
     this.groupId = groupId
+    this.callsCount++
   }
 }
 
@@ -30,5 +32,6 @@ describe('CheckLastEventStatus', () => {
     await checkLastEventStatus.perform('any_group_id');
 
     expect(loadLastEventRepository.groupId).toBe('any_group_id');
+    expect(loadLastEventRepository.callsCount).toBe(1);
   });
 });
