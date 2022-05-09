@@ -9,6 +9,7 @@
 - Duplicate Code
 - Shotgun Surgery
 - Long Parameter List
+- Primitive Obsession
 
 <!-- Coias boas que deveriamos seguir para colocar no código, coisas que já foram validados por pessaos no passado que já garantiram que é uma forma boa de programar -->
 # Design Patterns/Principles/Conventions
