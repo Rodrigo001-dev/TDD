@@ -14,5 +14,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "mockdate": "^3.0.5"
   }
 }

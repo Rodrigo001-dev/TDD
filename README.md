@@ -8,6 +8,7 @@
 - Test Code in Production
 - Duplicate Code
 - Shotgun Surgery
+- Long Parameter List
 
 <!-- Coias boas que deveriamos seguir para colocar no código, coisas que já foram validados por pessaos no passado que já garantiram que é uma forma boa de programar -->
 # Design Patterns/Principles/Conventions
@@ -22,3 +23,4 @@
 - Small Commits
 - System Under Test (SUT)
 - Strategy Pattern
+- Factory Pattern
