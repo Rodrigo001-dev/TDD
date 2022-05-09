@@ -1,6 +1,7 @@
 ## :page_with_curl: Projeto
 
-Nessa Aplicação fiz testes unitários para praticar todo o fluxo de testes com TDD
+Nessa Aplicação fiz testes unitários para praticar todo o fluxo de testes com TDD.
+
 TDD é uma metodologia de desenvolvimento orientado a testes.
 
 Existem 3 tipos de testes:
