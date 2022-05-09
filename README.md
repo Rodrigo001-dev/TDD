@@ -1,3 +1,13 @@
+# Projeto
+
+Nessa Aplicação fiz testes unitários para praticar todo o fluxo de testes com TDD
+Existem 3 tipos de testes:
+Testes unitários: testam funcionalidades que não tocam na camada de infra, que não tocam e efeitos colaterais com por exemplo: chamadas API, cadastro no banco de dados, elas nunca tocam em recursos externos.
+
+Testes de integração: são testes que testam funcionalidades que podem realizar chamadas a API, cadastro no banco da dados, funcionalidades que tem efeitos colaterais.
+
+Teste end-to-end: os testes end-to-end ou testes de ponta a ponta é utilizado para testar um fluxo da aplicação desde o começo até o fim, com o intuito de replicar cenários reais feitos pelos usuários com a intenção de validar que as funcionalidades estejam funcionando como o esperado.
+
 <!-- Coisas que deveriamos evitar de colocar no código -->
 # Anti-Patterns/Code Smells
 - Speculative Generality: começar a supor coisas que você precisa antes de realmente precisar

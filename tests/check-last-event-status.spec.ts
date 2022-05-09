@@ -1,8 +1,26 @@
 import { set, reset } from 'mockdate';
 
-type EventStatus = {
-  status : string;
-};
+// entidade
+class EventStatus {
+  status : 'active' | 'inReview' | 'done';
+
+  // movendo a lógica da regra de nogócio para a entidade
+  constructor (event?: { endDate: Date, reviewDurationInHours: number }) {
+    // regra de negócio
+    if (event === undefined) {
+      this.status = 'done';
+      return;
+    }
+    const now = new Date();
+    if (event.endDate >= now) {
+      this.status = 'active';
+      return;
+    }
+    const reviewDurationInMs = event.reviewDurationInHours * 60 * 60 * 1000;
+    const reviewDate = new Date(event.endDate.getTime() + reviewDurationInMs);
+    this.status = reviewDate >= now ? 'inReview' : 'done';
+  }
+}
 
 // useCase
 class CheckLastEventStatus {
@@ -10,12 +28,7 @@ class CheckLastEventStatus {
 
   async perform ({ groupId }: { groupId: string }): Promise<EventStatus> {
     const event = await this.loadLastEventRepository.loadLastEvent({ groupId });
-    if (event === undefined) return { status: 'done' };
-    const now = new Date();
-    if (event.endDate >= now) return { status: 'active' };
-    const reviewDurationInMs = event.reviewDurationInHours * 60 * 60 * 1000;
-    const reviewDate = new Date(event.endDate.getTime() + reviewDurationInMs);
-    return reviewDate >= now ? { status: 'inReview' } : { status: 'done' };
+    return new EventStatus(event);
   }
 }
 
