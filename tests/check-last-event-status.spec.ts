@@ -18,7 +18,7 @@ class CheckLastEventStatus {
 
 // interface é para definir um contrato
 interface LoadLastEventRepository {
-  loadLastEvent: (input: { groupId: string }) => Promise<{endDate: Date} | undefined>;
+  loadLastEvent: (input: { groupId: string }) => Promise<{ endDate: Date, reviewDurationInHours: number } | undefined>;
 }
 
 // Mock é um duble de teste que está precupado com o input, precupado em só ter
@@ -27,9 +27,9 @@ interface LoadLastEventRepository {
 class LoadLastEventRepositorySpy implements LoadLastEventRepository {
   groupId?: string;
   callsCount = 0;
-  output?: { endDate: Date };
+  output?: { endDate: Date, reviewDurationInHours: number };
 
-  async loadLastEvent ({ groupId }: { groupId: string }): Promise<{endDate: Date} |undefined> {
+  async loadLastEvent ({ groupId }: { groupId: string }): Promise<{ endDate: Date, reviewDurationInHours: number } |undefined> {
     // quando eu faço essa atribuição eu consigo fazer uma comparação no teste
     this.groupId = groupId
     this.callsCount++
@@ -82,7 +82,8 @@ describe('CheckLastEventStatus', () => {
     const { sut, loadLastEventRepository } = makeSut();
     loadLastEventRepository.output = {
       // getTime retorna a quantidade de milissegundos de uma data
-      endDate: new Date(new Date().getTime() + 1)
+      endDate: new Date(new Date().getTime() + 1),
+      reviewDurationInHours: 1
     };
 
     const eventStatus = await sut.perform({ groupId });
@@ -93,8 +94,9 @@ describe('CheckLastEventStatus', () => {
   it('should return status active when now is equal to event end time', async () => {
     const { sut, loadLastEventRepository } = makeSut();
     loadLastEventRepository.output = {
-      endDate: new Date(new Date())
-    };
+      endDate: new Date(),
+      reviewDurationInHours: 1
+    }
 
     const eventStatus = await sut.perform({ groupId });
 
@@ -105,7 +107,23 @@ describe('CheckLastEventStatus', () => {
     const { sut, loadLastEventRepository } = makeSut();
     loadLastEventRepository.output = {
       // getTime retorna a quantidade de milissegundos de uma data
-      endDate: new Date(new Date().getTime() - 1)
+      endDate: new Date(new Date().getTime() - 1),
+      reviewDurationInHours: 1
+    };
+
+    const eventStatus = await sut.perform({ groupId });
+
+    expect(eventStatus.status).toBe('inReview');
+  });
+
+  it('should return status inReview when now is before review time', async () => {
+    const reviewDurationInHours = 1;
+    const reviewDurationInMs = reviewDurationInHours * 60 * 60 * 1000;
+    const { sut, loadLastEventRepository } = makeSut();
+    loadLastEventRepository.output = {
+      // getTime retorna a quantidade de milissegundos de uma data
+      endDate: new Date(new Date().getTime() - reviewDurationInMs + 1),
+      reviewDurationInHours
     };
 
     const eventStatus = await sut.perform({ groupId });

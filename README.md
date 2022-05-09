@@ -10,6 +10,7 @@
 - Shotgun Surgery
 - Long Parameter List
 - Primitive Obsession
+- Bad Naming
 
 <!-- Coias boas que deveriamos seguir para colocar no código, coisas que já foram validados por pessaos no passado que já garantiram que é uma forma boa de programar -->
 # Design Patterns/Principles/Conventions
@@ -25,3 +26,4 @@
 - System Under Test (SUT)
 - Strategy Pattern
 - Factory Pattern
+- Clean Code
