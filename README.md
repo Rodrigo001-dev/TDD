@@ -1,6 +1,8 @@
 ## :page_with_curl: Projeto
 
 Nessa Aplicação fiz testes unitários para praticar todo o fluxo de testes com TDD
+TDD é uma metodologia de desenvolvimento orientado a testes.
+
 Existem 3 tipos de testes:
 Testes unitários: testam funcionalidades que não tocam na camada de infra, que não tocam e efeitos colaterais com por exemplo: chamadas API, cadastro no banco de dados, elas nunca tocam em recursos externos.
 
